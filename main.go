@@ -4,12 +4,14 @@ import (
 	"net/http"
 
 	"example.com/belajar-go/config"
+	"example.com/belajar-go/controllers"
 	"example.com/belajar-go/models"
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
 	config.ConnectDB()
+	// menyesuaikan antara struktur struct dengan tabel di db
 	config.DB.AutoMigrate(&models.Event{})
 
 	server := gin.Default()
@@ -17,8 +19,8 @@ func main() {
 	// route
 	api := server.Group("/api")
 	{
-		api.POST("/events", createEvents)
-		api.GET("/events", getEvents)
+		api.POST("/events", controllers.CreateEvents)
+		api.GET("/events", controllers.GetEvents)
 	}
 
 	server.Run(":8080")
@@ -39,33 +41,3 @@ func getEvents(context *gin.Context) {
 }
 
 
-
-func createEvents(context *gin.Context) {
-	var event models.Event
-	err := context.ShouldBindJSON(&event)
-	if err != nil {
-		context.JSON(http.StatusBadRequest, gin.H{
-			"message": "could not parse request data",
-			"error":   err.Error(),
-		})
-		return
-	}
-
-	// dummy
-	event.UserId = 1
-
-	// save inputan
-	err = event.Save()
-	if err != nil {
-		context.JSON(http.StatusInternalServerError, gin.H{
-			"message": "could not create event",
-			"error":   err.Error(),
-		})
-		return
-	}
-
-	context.JSON(http.StatusCreated, gin.H{
-		"Message": "create Event",
-		"event":   event,
-	})
-}
