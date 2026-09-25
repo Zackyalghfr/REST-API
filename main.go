@@ -3,11 +3,15 @@ package main
 import (
 	"net/http"
 
+	"example.com/belajar-go/config"
 	"example.com/belajar-go/models"
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
+	config.ConnectDB()
+	config.DB.AutoMigrate(&models.Event{})
+
 	server := gin.Default()
 
 	// route
@@ -33,6 +37,8 @@ func getEvents(context *gin.Context) {
 
 	context.JSON(http.StatusOK, events)
 }
+
+
 
 func createEvents(context *gin.Context) {
 	var event models.Event
