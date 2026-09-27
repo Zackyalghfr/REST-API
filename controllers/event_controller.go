@@ -51,3 +51,10 @@ func CreateEvents(context *gin.Context) {
 		"event":   event,
 	})
 }
+
+// untuk mengambil events berdasarkan id
+func GetEventsById(context *gin.Context) {
+	var events models.Event
+
+	paramsId := context.Param("id")
+}
