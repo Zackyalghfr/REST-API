@@ -36,3 +36,12 @@ func GetEventById(id string) (Event, error) {
 	err := config.DB.First(&event, id).Error
 	return event, err
 }
+
+// update event
+func (e *Event) Update() error {
+	return config.DB.Save(e).Error
+}
+
+func (e *Event) Delete() error{
+	return config.DB.Delete(e).Error
+}
