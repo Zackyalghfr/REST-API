@@ -17,7 +17,7 @@ func main() {
 	{
 		api.POST("/events", controllers.CreateEvents)
 		api.GET("/events", controllers.GetEvents)
-		api.GET("/events/:id", controllers.GetEvents)
+		api.GET("/events/:id", controllers.GetEventsById)
 	}
 
 	server.Run(":8080")

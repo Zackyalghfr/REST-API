@@ -54,7 +54,19 @@ func CreateEvents(context *gin.Context) {
 
 // untuk mengambil events berdasarkan id
 func GetEventsById(context *gin.Context) {
-	var events models.Event
-
 	paramsId := context.Param("id")
+
+
+	event, err := models.GetEventById(paramsId)
+	if err != nil {
+		context.JSON(http.StatusNotFound, gin.H{
+			"error": "Event tidak ditemukan!",
+		})
+		return
+	}
+
+	context.JSON(http.StatusOK, gin.H{
+		"message" : "Data tampil detail event",
+		"event" : event,
+	})
 }
