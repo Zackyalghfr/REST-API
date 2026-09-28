@@ -30,7 +30,7 @@ func GetAllEvents() ([]Event, error) {
 	return events, result.Error
 }
 
-// menampilkan event berdasarkan id
+// menampilkan event berdasarkan parameter id
 func GetEventById(id string) (Event, error) {
 	var event Event
 	err := config.DB.First(&event, id).Error
