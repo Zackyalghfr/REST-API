@@ -11,6 +11,7 @@ import (
 
 var DB *gorm.DB
 
+// connect ke db menggunakan dsn (data source name)
 func ConnectDB() {
 	err := godotenv.Load()
 	if err != nil {
