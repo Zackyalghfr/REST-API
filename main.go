@@ -9,7 +9,7 @@ import (
 
 func main() {
 	config.ConnectDB()
-	config.DB.AutoMigrate(&models.Event{})
+	config.DB.AutoMigrate(&models.Event{}, models.User{})
 
 	server := gin.Default()
 
