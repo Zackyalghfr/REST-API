@@ -11,8 +11,8 @@ type Event struct {
 	Name        string 	  `json:"name" binding:"required"`
 	Description string 	  `json:"description" binding:"required"`
 	Location    string 	  `json:"location" binding:"required"`
-	UserId      int    	  `json:"userid"`
-	User 		User   	  `gorm:"foreignKey:userid" json:"-"`
+	UserId      uint      `json:"userid"`
+	User 		User   	  `gorm:"foreignKey:UserId" json:"-"`
 	Datetime	time.Time `json:"datetime" binding:"required"`
 }
 
